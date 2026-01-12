@@ -49,9 +49,11 @@
 #define ARPHRD_RAWIP ARPHRD_NONE
 #endif
 
+#ifndef CONFIG_QMI_WWAN_NO_NSS
 #ifdef CONFIG_PINCTRL_IPQ807x
 #define CONFIG_QCA_NSS_DRV
 //#define CONFIG_QCA_NSS_PACKET_FILTER
+#endif
 #endif
 
 #define _RMNET_NSS_H_
@@ -64,7 +66,9 @@ struct rmnet_nss_cb {
 static struct rmnet_nss_cb __read_mostly *nss_cb = NULL;
 #if defined(CONFIG_PINCTRL_IPQ807x) || defined(CONFIG_PINCTRL_IPQ5018)
 #ifdef CONFIG_RMNET_DATA
+#ifndef CONFIG_QMI_WWAN_NO_NSS
 #define CONFIG_QCA_NSS_DRV
+#endif
 /* define at qsdk/qca/src/linux-4.4/net/rmnet_data/rmnet_data_main.c */ //for spf11.x
 /* define at qsdk/qca/src/datarmnet/core/rmnet_config.c */ //for spf12.x
 /* set at qsdk/qca/src/data-kernel/drivers/rmnet-nss/rmnet_nss.c */

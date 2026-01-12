@@ -26,6 +26,18 @@ define KernelPackage/qmi_wwan_f/description
   Fibocom Linux USB QMI WWAN Driver
 endef
 
+define KernelPackage/qmi_wwan_f/config
+  config KMOD_QMI_WWAN_F_NO_NSS
+    bool "Disable NSS Support for Fibocom QMI WWAN"
+    default n
+    help
+      Force disable Qualcomm NSS acceleration support even if the platform supports it.
+endef
+
+ifneq ($(CONFIG_KMOD_QMI_WWAN_F_NO_NSS),)
+  EXTRA_CFLAGS+= -DCONFIG_QMI_WWAN_NO_NSS
+endif
+
 EXTRA_CFLAGS+= \
 	-Wno-unused-function \
 	-Wno-missing-prototypes \

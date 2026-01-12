@@ -25,6 +25,18 @@ define KernelPackage/pcie_mhi/description
   Kernel module for register a custom pciemhi platform device.
 endef
 
+define KernelPackage/pcie_mhi/config
+  config KMOD_PCIE_MHI_NO_NSS
+    bool "Disable NSS Support for Quectel PCIe MHI"
+    default n
+    help
+      Force disable Qualcomm NSS acceleration support even if the platform supports it.
+endef
+
+ifneq ($(CONFIG_KMOD_PCIE_MHI_NO_NSS),)
+  EXTRA_CFLAGS+= -DCONFIG_QMI_WWAN_NO_NSS
+endif
+
 EXTRA_CFLAGS+= \
 	-Wno-unused-function \
 	-Wno-unused-variable \

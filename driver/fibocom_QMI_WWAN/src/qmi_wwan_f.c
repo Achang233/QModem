@@ -46,8 +46,10 @@
 #define ARPHRD_RAWIP ARPHRD_NONE
 #endif
 
+#ifndef CONFIG_QMI_WWAN_NO_NSS
 #ifdef CONFIG_PINCTRL_IPQ807x
 #define CONFIG_QCA_NSS_DRV
+#endif
 #endif
 
 #if 1//def CONFIG_QCA_NSS_DRV
